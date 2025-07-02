@@ -1,0 +1,69 @@
+{
+  "flow": {
+    "nodes": [
+      {
+        "id": "1751481834504",
+        "type": "default",
+        "position": {
+          "x": 226.5,
+          "y": 64.5
+        },
+        "data": {
+          "label": "✅ Trigger Node",
+          "type": "trigger"
+        },
+        "style": {
+          "padding": 10,
+          "borderRadius": "0.75rem",
+          "backgroundColor": "#bbf7d0"
+        }
+      },
+      {
+        "id": "1751481837485",
+        "type": "default",
+        "position": {
+          "x": 310,
+          "y": 147
+        },
+        "data": {
+          "label": "🔵 API Node",
+          "type": "api"
+        },
+        "style": {
+          "padding": 10,
+          "borderRadius": "0.75rem",
+          "backgroundColor": "#bfdbfe"
+        }
+      },
+      {
+        "id": "1751481885545",
+        "type": "default",
+        "position": {
+          "x": 380.451929100664,
+          "y": 239.26106160371586
+        },
+        "data": {
+          "label": "⚠️ Condition Node",
+          "type": "condition"
+        },
+        "style": {
+          "padding": 10,
+          "borderRadius": "0.75rem",
+          "backgroundColor": "#fef9c3"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "source": "1751481834504",
+        "target": "1751481837485",
+        "id": "xy-edge__1751481834504-1751481837485"
+      },
+      {
+        "source": "1751481837485",
+        "target": "1751481885545",
+        "id": "xy-edge__1751481837485-1751481885545"
+      }
+    ]
+  }
+}
