@@ -2,15 +2,16 @@
   "flow": {
     "nodes": [
       {
-        "id": "1751481834504",
+        "id": "1751531712309",
         "type": "default",
         "position": {
-          "x": 226.5,
-          "y": 64.5
+          "x": 139.669195161135,
+          "y": -26.90687758380686
         },
         "data": {
           "label": "✅ Trigger Node",
-          "type": "trigger"
+          "type": "trigger",
+          "event": "api"
         },
         "style": {
           "padding": 10,
@@ -19,15 +20,16 @@
         }
       },
       {
-        "id": "1751481837485",
+        "id": "1751531715760",
         "type": "default",
         "position": {
-          "x": 310,
-          "y": 147
+          "x": 322.2387660631583,
+          "y": 64.00216728097288
         },
         "data": {
           "label": "🔵 API Node",
-          "type": "api"
+          "type": "api",
+          "url": "https://gmail.googleapis.com/gmail/v1/users/me/messages/send"
         },
         "style": {
           "padding": 10,
@@ -36,15 +38,16 @@
         }
       },
       {
-        "id": "1751481885545",
+        "id": "1751531730187",
         "type": "default",
         "position": {
-          "x": 380.451929100664,
-          "y": 239.26106160371586
+          "x": 139.66919516113504,
+          "y": 178.47969940728944
         },
         "data": {
           "label": "⚠️ Condition Node",
-          "type": "condition"
+          "type": "condition",
+          "condition": "response.status === 200"
         },
         "style": {
           "padding": 10,
@@ -55,14 +58,14 @@
     ],
     "edges": [
       {
-        "source": "1751481834504",
-        "target": "1751481837485",
-        "id": "xy-edge__1751481834504-1751481837485"
+        "source": "1751531712309",
+        "target": "1751531715760",
+        "id": "xy-edge__1751531712309-1751531715760"
       },
       {
-        "source": "1751481837485",
-        "target": "1751481885545",
-        "id": "xy-edge__1751481837485-1751481885545"
+        "source": "1751531715760",
+        "target": "1751531730187",
+        "id": "xy-edge__1751531715760-1751531730187"
       }
     ]
   }
