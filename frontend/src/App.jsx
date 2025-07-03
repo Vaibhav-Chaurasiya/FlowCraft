@@ -1,106 +1,68 @@
-import React, { useRef, useState } from "react";
-import FlowCanvas from "./components/FlowCanvas";
-import Sidebar from "./components/Sidebar";
+// src/App.jsx
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import NodeConfigPanel from "./components/NodeConfigPanel";
-
-import { useDispatch } from "react-redux";
-import { setNodes } from "./store/nodesSlice";
-import { setEdges } from "./store/edgesSlice";
-
-import {
-  saveFlowToBackend,
-  loadFlowFromBackend,
-  runFlowSimulation,
-} from "./api";
-
-import { getAutoLayoutedElements } from "./utils/autoLayout";
-import { validateFlow } from "./utils/validateFlow";
+import Features from "./components/Features";
+import Testimonials from "./components/Testimonials";
+import FAQ from "./components/FAQ"; // ✅ New import
+import Footer from "./components/Footer";
 
 const App = () => {
-  const canvasRef = useRef();
-  const [selectedNode, setSelectedNode] = useState(null);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const messages = [
+    "⚡ FlowCraft: No-Code API Builder",
+    "🚀 Build Workflows Like Zapier",
+    "🧩 Drag, Drop, Automate",
+  ];
+  const [index, setIndex] = useState(0);
 
-  // 💾 Save Flow to Backend
-  const handleSave = async () => {
-    const data = canvasRef.current?.getFlow();
-    await saveFlowToBackend(data);
-    alert("✅ Flow saved to backend!");
-  };
-
-  // 🔁 Load Flow from Backend
-  const handleLoad = async () => {
-    const data = await loadFlowFromBackend();
-    dispatch(setNodes(data.nodes));
-    dispatch(setEdges(data.edges));
-    alert("📥 Flow loaded from backend!");
-  };
-
-  // 📤 Export Flow as JSON
-  const handleExport = () => {
-    const data = canvasRef.current?.getFlow();
-    const blob = new Blob([JSON.stringify(data, null, 2)], {
-      type: "application/json",
-    });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "flowcraft-flow.json";
-    a.click();
-    URL.revokeObjectURL(url);
-  };
-
-  // 👀 Preview Flow with backend simulation
-  const handlePreview = async () => {
-    const data = canvasRef.current?.getFlow();
-    const error = validateFlow(data.nodes, data.edges);
-    if (error) return alert(error);
-
-    const result = await runFlowSimulation(data);
-    alert("📋 Simulated Flow Log:\n" + result.log.join("\n"));
-  };
-
-  // 📐 Auto Layout
-  const handleAutoLayout = () => {
-    const data = canvasRef.current?.getFlow();
-    const { nodes, edges } = getAutoLayoutedElements(data.nodes, data.edges);
-    dispatch(setNodes(nodes));
-    dispatch(setEdges(edges));
-    alert("📐 Auto-layout applied!");
-  };
-
-  // ⚙️ Node Config Panel update
-  const handleNodeUpdate = (updatedNode) => {
-    canvasRef.current?.updateNode(updatedNode);
-    setSelectedNode(updatedNode);
-  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % messages.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div className="h-screen w-screen flex flex-col bg-white text-black">
-      <Navbar
-        onSave={handleSave}
-        onLoad={handleLoad}
-        onExport={handleExport}
-        onPreview={handlePreview}
-        onAutoLayout={handleAutoLayout}
-        menuOpen={menuOpen}
-        setMenuOpen={setMenuOpen}
-      />
-      <div className="flex flex-1 overflow-hidden">
-        <Sidebar />
-        <div className="flex-1">
-          <FlowCanvas
-            ref={canvasRef}
-            onNodeSelect={setSelectedNode}
-          />
+    <div className="min-h-screen w-full bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 flex flex-col">
+      {/* 🔝 Navbar */}
+      <Navbar />
+
+      {/* ✨ Hero Section */}
+      <div className="flex flex-1 flex-col items-center justify-center text-center px-6 pt-32 pb-16">
+        <h1 className="text-3xl md:text-5xl font-bold text-purple-700 mb-4 min-h-[60px] transition-all duration-500 ease-in-out">
+          {messages[index]}
+        </h1>
+
+        <p className="text-lg md:text-xl text-gray-700 mb-10 max-w-2xl animate-fade-in-up">
+          Visually build, simulate, and export API workflows with drag & drop logic.
+        </p>
+
+        <button
+          onClick={() => navigate("/editor")}
+          className="bg-purple-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-purple-700 hover:scale-105 transition-all duration-300"
+        >
+          🚀 Launch Editor
+        </button>
+
+        {/* 🎥 Embedded YouTube Demo */}
+        <div className="mt-12 w-full max-w-4xl aspect-video rounded-xl overflow-hidden shadow-xl border border-white/50">
+          <iframe
+            src="https://www.youtube.com/embed/g4hyYepOZ-g"
+            title="FlowCraft Demo"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="w-full h-full"
+          ></iframe>
         </div>
-        <NodeConfigPanel
-          selectedNode={selectedNode}
-          onUpdate={handleNodeUpdate}
-        />
       </div>
+
+      {/* 🌟 Additional Sections */}
+      <Features />
+      <Testimonials />
+      <FAQ /> {/* ✅ Add this below Testimonials */}
+      <Footer />
     </div>
   );
 };
