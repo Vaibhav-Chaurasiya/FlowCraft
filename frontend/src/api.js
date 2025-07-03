@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8000/api";
+const BASE_URL = "https://flowcraft.onrender.com/api/flow";
 
 // 💾 Save Flow to Backend
 export const saveFlowToBackend = async (flowData) => {
