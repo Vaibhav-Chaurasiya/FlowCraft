@@ -33,7 +33,7 @@ const FlowCanvas = forwardRef((props, ref) => {
   const edges = useSelector((state) => state.edges);
   const flowRef = useRef(null);
 
-  // 🎯 Expose Redux-based state and updateNode to parent
+  // Expose Redux-based state and updateNode to parent
   useImperativeHandle(ref, () => ({
     getFlow: () => ({ nodes, edges }),
     updateNode: (updatedNode) => {
@@ -41,19 +41,19 @@ const FlowCanvas = forwardRef((props, ref) => {
     },
   }));
 
-  // 🔗 Handle edge connection
+  // Handle edge connection
   const onConnect = useCallback(
     (params) => dispatch(setEdges(addEdgeReactFlow(params, edges))),
     [dispatch, edges]
   );
 
-  // 🧲 Allow drop
+  // Allow drop
   const onDragOver = (event) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = "move";
   };
 
-  // 📥 Handle drop of new nodes
+  // Handle drop of new nodes
   const onDrop = useCallback(
     (event) => {
       event.preventDefault();
@@ -96,13 +96,13 @@ const FlowCanvas = forwardRef((props, ref) => {
     [dispatch]
   );
 
-  // 🔍 Handle node selection
+  // Handle node selection
   const onNodeClick = (_, node) => {
     dispatch(setSelectedNode(node));
     props.onNodeSelect?.(node);
   };
 
-  // 🧠 Handle node/edge updates from canvas (on drag, connect, etc.)
+  // Handle node/edge updates from canvas (on drag, connect, etc.)
   const onNodesChange = useCallback(
     (changes) => {
       const updated = [...nodes];

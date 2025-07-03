@@ -1,4 +1,3 @@
-// ScrollProgressBar.jsx (optional)
 import { useEffect, useState } from "react";
 
 const ScrollProgressBar = () => {

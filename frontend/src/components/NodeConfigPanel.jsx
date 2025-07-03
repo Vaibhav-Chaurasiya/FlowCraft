@@ -122,14 +122,14 @@ const NodeConfigPanel = ({ selectedNode, onUpdate }) => {
 
   return (
     <>
-      {/* 🖥 Desktop Sidebar */}
+      {/* Desktop Sidebar */}
       <div className="hidden md:block w-64 bg-white border-l px-4 py-4 overflow-auto">
         {selectedNode ? renderForm() : (
           <p className="text-gray-500 italic">No node selected</p>
         )}
       </div>
 
-      {/* 📱 Mobile Bottom Sheet */}
+      {/*Mobile Bottom Sheet */}
       {showMobilePanel && (
         <div className="fixed inset-x-0 bottom-0 z-50 bg-white border-t shadow-xl p-4 md:hidden max-h-[80vh] overflow-y-auto rounded-t-2xl transition-transform duration-300">
           <div className="flex justify-between items-center mb-2">

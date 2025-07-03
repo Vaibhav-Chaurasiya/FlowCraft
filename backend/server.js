@@ -10,18 +10,18 @@ const PORT = process.env.PORT || 8000;
 app.use(cors());
 app.use(express.json());
 
-// 🏠 Root route for health check
+// Root route for health check
 app.get("/", (req, res) => {
   res.send("✅ FlowCraft backend is live!");
 });
 
-// 📤 Get saved flow
+// Get saved flow
 app.get("/api/flow", (req, res) => {
   const db = JSON.parse(fs.readFileSync("./mock-db.json", "utf-8"));
   res.json(db.flow);
 });
 
-// 💾 Save flow
+// Save flow
 app.post("/api/flow", (req, res) => {
   const { nodes, edges } = req.body;
   const db = JSON.parse(fs.readFileSync("./mock-db.json", "utf-8"));
@@ -30,7 +30,7 @@ app.post("/api/flow", (req, res) => {
   res.json({ status: "success" });
 });
 
-// 🧪 Simulate flow
+// Simulate flow
 app.post("/api/run-flow", (req, res) => {
   const { nodes, edges } = req.body;
   const log = [];
@@ -57,7 +57,7 @@ app.post("/api/run-flow", (req, res) => {
   res.json({ status: "ok", log });
 });
 
-// 🚀 Start server
+// Start server
 app.listen(PORT, () => {
   console.log(`✅ FlowCraft backend running at http://localhost:${PORT}`);
 });

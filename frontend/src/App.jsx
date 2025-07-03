@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Features from "./components/Features";
 import Testimonials from "./components/Testimonials";
-import FAQ from "./components/FAQ"; // ✅ New import
+import FAQ from "./components/FAQ"; 
 import Footer from "./components/Footer";
 
 const App = () => {
@@ -61,7 +61,7 @@ const App = () => {
       {/* 🌟 Additional Sections */}
       <Features />
       <Testimonials />
-      <FAQ /> {/* ✅ Add this below Testimonials */}
+      <FAQ /> 
       <Footer />
     </div>
   );

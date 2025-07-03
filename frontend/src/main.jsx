@@ -5,8 +5,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 
-import App from "./App";                  // 🏠 Landing Page
-import Editor from "./pages/Editor";     // 🛠️ Flow Editor
+import App from "./App";                  
+import Editor from "./pages/Editor";     
 
 import "./index.css";
 
